@@ -30,10 +30,9 @@ def convert(s, num_rows)
   return s if num_rows == 1
   strs = []
   num_rows.times { strs << '' }
-  strs[0] << s[0]
   bottom = true # going bottom, else going zigzag
-  i = 1
-  s[1..-1].each_char do |c|
+  i = 0
+  s.each_char do |c|
     p strs
     p i
     strs[i] << c
