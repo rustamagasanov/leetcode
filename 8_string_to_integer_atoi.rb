@@ -28,21 +28,10 @@
 # Output: 0
 
 def my_atoi(str)
-  s = str.lstrip
+  str.lstrip!
   digit = ''
-  if s[0] == '-' || s[0] == '+'
-    digit << s[0]
-    start_i = 1
-    return 0 if s[1] == 0
-  elsif s[0] =~ /\d/
-    start_i = 0
-    return 0 if s[0] == 0
-  else
-    return 0
-  end
-
-  s[start_i..-1].each_char { |c| (c =~ /\d/) ? digit << c : break }
-  digit = digit.to_i
+  return 0 unless str[0] =~ /[-+\d]/
+  digit = str.to_i
 
   if digit > 2**31 - 1
     2**31 - 1
@@ -58,4 +47,6 @@ p my_atoi('   -42')
 p my_atoi('4193 with words')
 p my_atoi('words and 987')
 p my_atoi('-91283472332')
+p my_atoi('+1')
+p my_atoi('-00123')
 
