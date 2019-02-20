@@ -25,22 +25,28 @@ def three_sum(nums)
   res = []
   i = 0
   loop do
+    # p "i=#{i}, nums[i]=#{nums[i]}"
     return res.uniq if nums[i].nil? || nums[i] > 0
     j = i + 1
     k = nums.size - 1
     while j < k
       # p "i=#{i},j=#{j},k=#{k}"
       sum = nums[i] + nums[j] + nums[k]
-      if sum == 0
-        res << [nums[i], nums[j], nums[k]]
+      if sum < 0
+        j += 1 while nums[j] == nums[j + 1]
         j += 1
-        k -= 1
       elsif sum > 0
+        k -= 1 while nums[k] == nums[k - 1]
         k -= 1
       else
+        res << [nums[i], nums[j], nums[k]]
+        j += 1 while nums[j] == nums[j + 1]
         j += 1
+        k -= 1 while nums[k] == nums[k - 1]
+        k -= 1
       end
     end
+    i += 1 while nums[i] == nums[i + 1]
     i += 1
   end
 end
