@@ -19,28 +19,21 @@ def letter_combinations(digits)
   size = digits.each_char.reduce(1) { |memo, digit| memo *= map[digit].size }
   res = []
   size.times { res << '' }
-  # p "size=#{res.size}"
 
-  counter = nil
-  digits.each_char.with_index(0) do |digit, step|
-    cycle = counter || 1
-    counter = 0
-    recount = true
-    # cycle_base = (step == 0) ? 0 : map[digits[step - 1]].size
-    # cycle = cycle_base ** step
-    # p "cycle=#{cycle}"
+  counter = 1
+  digits.each_char do |digit|
+    cycle = counter
     i = 0
     loop do
       map[digit].each_char do |letter|
         cycle.times do
           res[i] << letter
-          counter += 1 if recount
           i += 1
         end
       end
-      recount = false
       break if i >= res.size
     end
+    counter = map[digit].size * cycle
   end
   res
 end
