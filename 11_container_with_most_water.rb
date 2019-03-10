@@ -8,15 +8,24 @@
 # Output: 49
 
 def max_area(height)
-  max = -1.0/0.0
-  (0...height.size).each do |i|
-    (i + 1...height.size).each do |j|
-      vert = [height[i], height[j]].min
-      hori = j - i
-      max = [vert * hori, max].max
+  max = 0
+
+  i = 0
+  j = height.size - 1
+
+  while i < j
+    vert = [height[i], height[j]].min
+    hori = j - i
+    max = [vert * hori, max].max
+
+    if height[i] > height[j]
+      j -= 1
+    else
+      i += 1
     end
   end
+
   max
 end
 
-p max_area([2,8])
+p max_area([1,8,6,2,5,4,8,3,7])
